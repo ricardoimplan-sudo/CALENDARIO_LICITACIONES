@@ -749,19 +749,31 @@
         }
 
         // --- PDF GENERATION ---
-       function uploadPDF(id) {
+              function uploadPDF(id) {
             const entry = entries.find(e => e.id === id);
             if(!entry) return;
-            // Crear un input de archivo invisible para seleccionar el PDF
-            const fileInput = document.createElement('input');
-            fileInput.type = 'file';
-            fileInput.accept = '.pdf';
-            fileInput.style.display = 'none';
+            
+            // Crear o reutilizar un input que no esté oculto de forma estricta para evitar bloqueos
+            let fileInput = document.getElementById('lector-pdfs');
+            if (!fileInput) {
+                fileInput = document.createElement('input');
+                fileInput.type = 'file';
+                fileInput.accept = '.pdf';
+                fileInput.id = 'lector-pdfs';
+                // Lo movemos fuera de la pantalla en lugar de hacerlo invisible
+                fileInput.style.position = 'absolute';
+                fileInput.style.left = '-9999px'; 
+                document.body.appendChild(fileInput);
+            }
+            
+            // Limpiamos por si había algo antes
+            fileInput.value = '';
+            
             fileInput.onchange = async (e) => {
                 const file = e.target.files[0];
                 if (!file) return;
                 showToast(`Subiendo ${file.name}...`, 'info');
-                // Convertir a Base64
+                
                 const reader = new FileReader();
                 reader.onload = async function() {
                     const base64Data = reader.result;
@@ -780,35 +792,29 @@
                         
                         if (result.status === 'success') {
                             showToast('PDF guardado en Google Drive', 'success');
-                            
-                            // Añadirlo a la lista de archivos de la licitación
                             const newFile = {
                                 id: Date.now().toString(),
                                 entryId: id,
                                 title: result.name,
                                 url: result.url
                             };
-                            
                             entryFiles.push(newFile);
                             localStorage.setItem('planner_entry_files', JSON.stringify(entryFiles));
-                            
-                            // Opcional: Subir a la nube los enlaces actualizados inmediatamente
                             manualSaveData();
                             renderViews();
                         } else {
                             showToast('Error al guardar en Drive', 'warning');
                         }
-                    } catch (err) {
-                        showToast('Error de red al subir PDF', 'warning');
+                    } catch (error) {
+                        showToast('Error de conexión', 'warning');
                     }
                 };
                 reader.readAsDataURL(file);
             };
-            document.body.appendChild(fileInput);
-            fileInput.click();
             
-        }        
-
+            // Llamamos al clic del selector de archivos
+            fileInput.click();
+        }
 
         // Modal & CRUD
         function openModal(entryId = null, defaultDate = null) {
