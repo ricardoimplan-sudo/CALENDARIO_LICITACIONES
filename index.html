@@ -486,7 +486,10 @@
                 if(!response.ok) throw new Error("Error en red");
                 const data = await response.json();
                 if (data && Array.isArray(data)) {
-                    entries = data;
+                   entries = data.map(e => {
+                        if (e.date && e.date.includes('T')) e.date = e.date.split('T')[0];
+                        return e;
+                    });
                     
                     // Extraer los archivos (entryFiles) que vienen empaquetados desde la nube
                     entryFiles = [];
