@@ -804,7 +804,7 @@
             document.getElementById('entry-id').value = '';
 
             if (entryId) {
-                const entry = entries.find(e => e.id === entryId);
+                const entry = entries.find(e => String(e.id) === String(entryId));
                 if (entry) {
                     document.getElementById('modal-title').innerHTML = '<i data-lucide="edit-3" class="w-5 h-5 text-cyan-500"></i> Editar Registro';
                     document.getElementById('entry-id').value = entry.id;
@@ -861,7 +861,7 @@
         function editEntry(id) { openModal(id); }
         function deleteEntry(id) {
             if(confirm("¿Seguro que deseas eliminar este registro?")) {
-                entries = entries.filter(e => e.id !== id);
+                entries = entries.filter(e => String(e.id) !== String(id));
                 manualSaveData();
                 renderViews();
             }
@@ -872,7 +872,7 @@
         
         // --- ENTRY FILES LOGIC ---
         function openEntryFilesModal(entryId) {
-            const entry = entries.find(e => e.id === entryId);
+            const entry = entries.find(e => String(e.id) === String(entryId));
             if(!entry) return;
 
             document.getElementById('entry-file-parent-id').value = entryId;
