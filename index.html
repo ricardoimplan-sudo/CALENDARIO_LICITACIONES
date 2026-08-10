@@ -482,7 +482,7 @@
             }
             showToast('Sincronizando con la base de datos...', 'info');
             try {
-                const response = await fetch(GOOGLE_APP_SCRIPT_URL + '?action=read');
+                const response = await fetch(GOOGLE_APP_SCRIPT_URL + '?action=read&t=' + new Date().getTime());
                 if(!response.ok) throw new Error("Error en red");
                 const data = await response.json();
                 if (data && Array.isArray(data)) {
