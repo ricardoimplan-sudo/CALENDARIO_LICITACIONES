@@ -591,7 +591,7 @@
                         
                         const hasFiles = entryFiles.some(f => f.entryId === entry.id);
                         let docIcon = `<button onclick="event.stopPropagation(); openEntryFilesModal('${entry.id}')" title="Archivos Adjuntos" class="p-0.5 rounded transition ${hasFiles ? 'text-blue-500 hover:text-blue-600' : 'text-slate-400 hover:text-blue-500'}"><i data-lucide="folder" class="w-3 h-3"></i></button>`;
-                        let pdfIcon = `<button onclick="event.stopPropagation(); downloadPDF('${entry.id}')" class="text-slate-400 hover:text-rose-500 p-0.5"><i data-lucide="file-down" class="w-3 h-3"></i></button>`;
+                        let pdfIcon = `<button onclick="event.stopPropagation(); uploadPDF('${entry.id}')" class="text-slate-400 hover:text-emerald-500 p-0.5" title="Subir PDF"><i data-lucide="file-up" class="w-3 h-3"></i></button>`;
                         
                         badge.onclick = (e) => { e.stopPropagation(); editEntry(entry.id); };
                         badge.innerHTML = `
@@ -680,8 +680,7 @@
                     </td>
                     <td class="p-4 text-right whitespace-nowrap">
                         <div class="flex items-center justify-end gap-1">
-                            <button onclick="downloadPDF('${entry.id}')" title="Descargar PDF" class="p-2 text-rose-500 hover:bg-rose-50 dark:hover:bg-rose-950/50 rounded-lg transition"><i data-lucide="file-down" class="w-4 h-4"></i></button>
-                            <button onclick="editEntry('${entry.id}')" class="p-2 text-slate-400 hover:text-cyan-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition"><i data-lucide="edit" class="w-4 h-4"></i></button>
+                            <button onclick="uploadPDF('${entry.id}')" class="p-2 hover:bg-slate-100 dark:hover:bg-slate-700 text-emerald-500 rounded-lg transition" title="Subir PDF"><i data-lucide="file-up" class="w-4 h-4"></i></button>                            <button onclick="editEntry('${entry.id}')" class="p-2 text-slate-400 hover:text-cyan-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition"><i data-lucide="edit" class="w-4 h-4"></i></button>
                             <button onclick="deleteEntry('${entry.id}')" class="p-2 text-slate-400 hover:text-pink-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition"><i data-lucide="trash-2" class="w-4 h-4"></i></button>
                         </div>
                     </td>
@@ -750,74 +749,65 @@
         }
 
         // --- PDF GENERATION ---
-        function downloadPDF(id) {
+       function uploadPDF(id) {
             const entry = entries.find(e => e.id === id);
             if(!entry) return;
-
-            showToast('Generando PDF...', 'info');
-            
-            const template = document.getElementById('pdf-template');
-            template.innerHTML = `
-                <div style="border-bottom: 2px solid #0ea5e9; padding-bottom: 20px; margin-bottom: 30px; display: flex; justify-content: space-between; align-items: flex-end;">
-                    <div>
-                        <h1 style="color: #0f172a; margin: 0; font-size: 28px; font-weight: 800; font-family: 'Outfit', sans-serif;">Reporte de Licitación</h1>
-                        <p style="color: #64748b; margin: 5px 0 0 0; font-size: 14px;">Gobierno del Estado de Aguascalientes</p>
-                    </div>
-                    <div style="text-align: right; color: #64748b; font-size: 12px; font-family: monospace;">
-                        ID: ${entry.id.substring(0,8)}<br>
-                        Emitido: ${new Date().toLocaleString()}
-                    </div>
-                </div>
-                
-                <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
-                    <tr>
-                        <td style="padding: 15px; background: #f8fafc; border: 1px solid #e2e8f0; width: 30%; font-weight: bold; color: #475569;">Proyecto</td>
-                        <td style="padding: 15px; border: 1px solid #e2e8f0; font-size: 18px; font-weight: bold; color: #0f172a;">${escapeHtml(entry.topic)}</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 15px; background: #f8fafc; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Fecha Designada</td>
-                        <td style="padding: 15px; border: 1px solid #e2e8f0; font-family: monospace;">${entry.date}</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 15px; background: #f8fafc; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Monto / Inversión</td>
-                        <td style="padding: 15px; border: 1px solid #e2e8f0; font-family: monospace; font-size: 16px; color: #059669; font-weight: bold;">${escapeHtml(entry.quantity)}</td>
-                    </tr>
-                    <tr>
-                        <td style="padding: 15px; background: #f8fafc; border: 1px solid #e2e8f0; font-weight: bold; color: #475569;">Estado Actual</td>
-                        <td style="padding: 15px; border: 1px solid #e2e8f0;">${entry.status}</td>
-                    </tr>
-                </table>
-
-                <div style="margin-bottom: 30px;">
-                    <h3 style="color: #334155; margin-bottom: 10px; font-size: 16px;">Observaciones / Fallo:</h3>
-                    <div style="padding: 20px; background: #f1f5f9; border-left: 4px solid #3b82f6; border-radius: 4px; min-height: 100px; color: #334155; line-height: 1.6;">
-                        ${escapeHtml(entry.notes || 'Sin observaciones registradas.')}
-                    </div>
-                </div>
-
-                ${(() => {
-                    const attachedFiles = entryFiles.filter(f => f.entryId === entry.id);
-                    if(attachedFiles.length > 0) {
-                        return '<div style="padding: 15px; background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; font-size: 13px;"><strong>Documentos Adjuntos:</strong><ul style="margin-top:8px; padding-left: 20px;">' + attachedFiles.map(f => `<li><a href="${f.url}" style="color: #2563eb;">${escapeHtml(f.title)}</a></li>`).join('') + '</ul></div>';
+            // Crear un input de archivo invisible para seleccionar el PDF
+            const fileInput = document.createElement('input');
+            fileInput.type = 'file';
+            fileInput.accept = '.pdf';
+            fileInput.style.display = 'none';
+            fileInput.onchange = async (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                showToast(`Subiendo ${file.name}...`, 'info');
+                // Convertir a Base64
+                const reader = new FileReader();
+                reader.onload = async function() {
+                    const base64Data = reader.result;
+                    try {
+                        const response = await fetch(GOOGLE_APP_SCRIPT_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                            body: JSON.stringify({ 
+                                action: 'upload_pdf', 
+                                filename: file.name,
+                                base64: base64Data
+                            })
+                        });
+                        
+                        const result = await response.json();
+                        
+                        if (result.status === 'success') {
+                            showToast('PDF guardado en Google Drive', 'success');
+                            
+                            // Añadirlo a la lista de archivos de la licitación
+                            const newFile = {
+                                id: Date.now().toString(),
+                                entryId: id,
+                                title: result.name,
+                                url: result.url
+                            };
+                            
+                            entryFiles.push(newFile);
+                            localStorage.setItem('planner_entry_files', JSON.stringify(entryFiles));
+                            
+                            // Opcional: Subir a la nube los enlaces actualizados inmediatamente
+                            manualSaveData();
+                            renderViews();
+                        } else {
+                            showToast('Error al guardar en Drive', 'warning');
+                        }
+                    } catch (err) {
+                        showToast('Error de red al subir PDF', 'warning');
                     }
-                    return '';
-                })()}
-            `;
-            template.style.display = 'block';
-            
-            const opt = {
-                margin:       1,
-                filename:     `Licitacion_${entry.topic.replace(/\s+/g,'_')}.pdf`,
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2 },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+                };
+                reader.readAsDataURL(file);
             };
-
-            html2pdf().set(opt).from(template).save().then(() => {
-                template.style.display = 'none';
-                showToast('PDF descargado exitosamente', 'success');
-            });
-        }
+            document.body.appendChild(fileInput);
+            fileInput.click();
+            document.body.removeChild(fileInput);
+        }        
 
 
         // Modal & CRUD
