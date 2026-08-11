@@ -848,7 +848,7 @@
             };
 
             if (id) {
-                const idx = entries.findIndex(item => item.id === id);
+                const idx = entries.findIndex(item => String(item.id) === String(id));
                 if (idx !== -1) entries[idx] = newEntry;
             } else {
                 entries.push(newEntry);
