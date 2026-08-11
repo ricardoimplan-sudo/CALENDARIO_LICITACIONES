@@ -127,7 +127,7 @@
             Sistema de Licitaciones
         </h1>
         <p class="text-slate-500 dark:text-slate-400 font-mono text-sm md:text-base mb-12 text-center max-w-md">
-            Plataforma centralizada para gestiÃ³n de proyectos, inversiÃ³n y seguimiento de fallos en tiempo real.
+            Plataforma centralizada para gesti??n de proyectos, inversi??n y seguimiento de fallos en tiempo real.
         </p>
 
         <button onclick="enterApp()" class="group relative px-8 py-4 bg-slate-900 dark:bg-cyan-500 text-white dark:text-slate-950 font-bold text-lg rounded-2xl shadow-xl overflow-hidden transition-all hover:scale-105 active:scale-95">
@@ -175,7 +175,7 @@
                 </div>
 
                 <div class="flex items-center gap-2 sm:gap-3">
-                    <!-- BotÃ³n Tema -->
+                    <!-- Bot??n Tema -->
                     <button onclick="toggleTheme()" title="Cambiar Tema" class="p-2 text-slate-600 dark:text-slate-300 hover:text-cyan-500 dark:hover:text-cyan-400 bg-white dark:bg-slate-800/80 rounded-xl border border-slate-200 dark:border-slate-700 transition shadow-sm hover:shadow-md">
                         <i data-lucide="sun" id="icon-sun" class="w-5 h-5 hidden dark:block"></i>
                         <i data-lucide="moon" id="icon-moon" class="w-5 h-5 block dark:hidden"></i>
@@ -241,7 +241,7 @@
                     </div>
                 </div>
                 <div class="grid grid-cols-7 border-b border-slate-200 dark:border-slate-800 text-center bg-slate-50/80 dark:bg-slate-950/80 font-mono font-semibold text-xs text-slate-500 dark:text-cyan-400 py-3 uppercase tracking-wider">
-                    <div>Lun</div><div>Mar</div><div>MiÃ©</div><div>Jue</div><div>Vie</div><div>SÃ¡b</div><div>Dom</div>
+                    <div>Lun</div><div>Mar</div><div>Mi??</div><div>Jue</div><div>Vie</div><div>S??b</div><div>Dom</div>
                 </div>
                 <div id="calendar-days-grid" class="grid grid-cols-7 auto-rows-fr flex-1 divide-x divide-y divide-slate-200 dark:divide-slate-800/80">
                     <!-- Dynamic calendar cells -->
@@ -255,7 +255,7 @@
                         <thead>
                             <tr class="bg-slate-50 dark:bg-slate-950/90 border-b border-slate-200 dark:border-slate-800 text-xs font-mono uppercase tracking-wider font-semibold text-slate-500 dark:text-cyan-400">
                                 <th class="p-4">Fecha</th>
-                                <th class="p-4">LicitaciÃ³n</th>
+                                <th class="p-4">Licitaci??n</th>
                                 <th class="p-4">Monto</th>
                                 <th class="p-4">Estado</th>
                                 <th class="p-4">Fallo / Doc</th>
@@ -277,7 +277,7 @@
             <div id="view-analytics" class="hidden grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div class="glass-panel p-6 rounded-2xl shadow-lg flex flex-col">
                     <h3 class="font-bold text-slate-800 dark:text-slate-100 mb-1 flex items-center gap-2 text-base">
-                        <i data-lucide="pie-chart" class="w-5 h-5 text-cyan-600 dark:text-cyan-400"></i> InversiÃ³n por LicitaciÃ³n
+                        <i data-lucide="pie-chart" class="w-5 h-5 text-cyan-600 dark:text-cyan-400"></i> Inversi??n por Licitaci??n
                     </h3>
                     <div class="relative flex-1 min-h-[300px] mt-4">
                         <canvas id="chart-topics-sum"></canvas>
@@ -318,8 +318,8 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     <div>
-                        <label class="block text-xs font-mono font-bold text-slate-500 dark:text-cyan-400 uppercase tracking-wider mb-1.5">LicitaciÃ³n / Proyecto</label>
-                        <input type="text" id="form-topic" placeholder="Ej. PavimentaciÃ³n..." required class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/30 outline-none text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 transition-all">
+                        <label class="block text-xs font-mono font-bold text-slate-500 dark:text-cyan-400 uppercase tracking-wider mb-1.5">Licitaci??n / Proyecto</label>
+                        <input type="text" id="form-topic" placeholder="Ej. Pavimentaci??n..." required class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/30 outline-none text-slate-800 dark:text-slate-100 placeholder-slate-400 dark:placeholder-slate-600 transition-all">
                     </div>
                     <div>
                         <label class="block text-xs font-mono font-bold text-slate-500 dark:text-cyan-400 uppercase tracking-wider mb-1.5">Monto / Valor</label>
@@ -330,10 +330,10 @@
                 <div>
                     <label class="block text-xs font-mono font-bold text-slate-500 dark:text-cyan-400 uppercase tracking-wider mb-1.5">Estado</label>
                     <select id="form-status" class="w-full px-4 py-2.5 text-sm bg-slate-50 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 rounded-xl focus:border-cyan-500 focus:ring-2 focus:ring-cyan-500/30 outline-none text-slate-800 dark:text-slate-100 transition-all">
-                        <option value="Pendiente">ðŸŸ¦ Pendiente</option>
-                        <option value="En proceso">ðŸŸ§ En proceso</option>
-                        <option value="Completado">ðŸŸ© Completado</option>
-                        <option value="Cancelado">ðŸŸ¥ Cancelado</option>
+                        <option value="Pendiente">???? Pendiente</option>
+                        <option value="En proceso">???? En proceso</option>
+                        <option value="Completado">???? Completado</option>
+                        <option value="Cancelado">???? Cancelado</option>
                     </select>
                 </div>
 
@@ -355,7 +355,7 @@
         <!-- Rellenado por JS -->
     </div>
 
-    <!-- Modal Gestor de Archivos de LicitaciÃ³n -->
+    <!-- Modal Gestor de Archivos de Licitaci??n -->
     <div id="entry-files-modal" class="fixed inset-0 bg-slate-900/40 dark:bg-slate-950/80 backdrop-blur-sm z-[250] hidden flex items-center justify-center p-4">
         <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-cyan-500/40 shadow-2xl dark:shadow-[0_0_30px_rgba(0,240,255,0.2)] max-w-md w-full overflow-hidden transform transition-all scale-95 opacity-0 flex flex-col max-h-[80vh]" id="entry-files-content">
             <div class="p-5 border-b border-slate-100 dark:border-slate-800 flex items-center justify-between bg-slate-50 dark:bg-slate-950/60">
@@ -368,10 +368,10 @@
             </div>
             
             <div class="p-5 overflow-y-auto custom-scrollbar flex-1">
-                <h4 id="entry-files-title" class="text-sm font-mono font-bold text-slate-500 dark:text-cyan-400 uppercase tracking-wider mb-3">LicitaciÃ³n: ---</h4>
+                <h4 id="entry-files-title" class="text-sm font-mono font-bold text-slate-500 dark:text-cyan-400 uppercase tracking-wider mb-3">Licitaci??n: ---</h4>
                 <div id="entry-files-list" class="space-y-2"></div>
                 <div id="entry-files-empty" class="hidden text-center p-6 text-slate-400 dark:text-slate-500 text-sm">
-                    No hay documentos para esta licitaciÃ³n.
+                    No hay documentos para esta licitaci??n.
                 </div>
             </div>
 
@@ -379,11 +379,11 @@
                 <form id="entry-file-form" onsubmit="handleAddEntryFile(event)" class="space-y-3">
                     <input type="hidden" id="entry-file-parent-id">
                     <div>
-                        <input type="text" id="entry-file-title" placeholder="TÃ­tulo (ej. Convocatoria Oficial)" required class="w-full px-3 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none text-slate-800 dark:text-slate-100 transition-all">
+                        <input type="text" id="entry-file-title" placeholder="T??tulo (ej. Convocatoria Oficial)" required class="w-full px-3 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none text-slate-800 dark:text-slate-100 transition-all">
                     </div>
                     <div class="flex gap-2">
                         <input type="url" id="entry-file-url" placeholder="Link de Google Drive/Docs" required class="flex-1 px-3 py-2 text-sm bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg focus:border-cyan-500 focus:ring-1 focus:ring-cyan-500 outline-none text-slate-800 dark:text-slate-100 transition-all">
-                        <button type="submit" class="px-4 py-2 bg-slate-800 dark:bg-cyan-500 text-white dark:text-slate-950 text-sm font-bold rounded-lg hover:bg-slate-700 dark:hover:bg-cyan-400 transition shadow-md shrink-0">AÃ±adir</button>
+                        <button type="submit" class="px-4 py-2 bg-slate-800 dark:bg-cyan-500 text-white dark:text-slate-950 text-sm font-bold rounded-lg hover:bg-slate-700 dark:hover:bg-cyan-400 transition shadow-md shrink-0">A??adir</button>
                     </div>
                 </form>
             </div>
@@ -403,7 +403,7 @@
         let chartStatusBreakdown = null;
 
         // URL DE APPS SCRIPT
-        const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzRuO1UR9Y2hrJFQXs7xpFAyNF_qk3SyWNAGXRwLSOb0vkeJqu8Aw7Sws9Cp089Aso2/exec";
+        const GOOGLE_APP_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbysT88pWOtYkYaBDAHtxNKrwT4q6nZ1IOQYa-LnqxH_0La44VlfNsp3KHd6HYBu4skB/exec";
 
         // Initialization
         window.onload = function() {
@@ -418,7 +418,7 @@
             lucide.createIcons();
             
             const sampleEntries = [
-                { id: '1', date: new Date().toISOString().split('T')[0], topic: 'PavimentaciÃ³n', quantity: '$2,500,000', status: 'Completado', notes: 'Constructora Alfa', docLink: 'https://docs.google.com' }
+                { id: '1', date: new Date().toISOString().split('T')[0], topic: 'Pavimentaci??n', quantity: '$2,500,000', status: 'Completado', notes: 'Constructora Alfa', docLink: 'https://docs.google.com' }
             ];
 
             const storedEntryFiles = localStorage.getItem('planner_entry_files');
@@ -507,7 +507,7 @@
                     showToast('Datos cargados', 'success');
                 }
             } catch (error) {
-                showToast('Error de conexiÃ³n, usando datos locales', 'warning');
+                showToast('Error de conexi??n, usando datos locales', 'warning');
             }
             renderViews();
         }
@@ -603,8 +603,8 @@
                                 </div>
                             </div>
                             <div class="text-[10px] flex justify-between items-center font-mono opacity-80">
-                                <span>ðŸ’° ${escapeHtml(entry.quantity)}</span>
-                                <span>${entry.status === 'Completado'?'ðŸŸ©':entry.status==='En proceso'?'ðŸŸ§':entry.status==='Cancelado'?'ðŸŸ¥':'ðŸŸ¦'}</span>
+                                <span>???? ${escapeHtml(entry.quantity)}</span>
+                                <span>${entry.status === 'Completado'?'????':entry.status==='En proceso'?'????':entry.status==='Cancelado'?'????':'????'}</span>
                             </div>
                         `;
                         badgeContainer.appendChild(badge);
@@ -710,7 +710,7 @@
                 data: {
                     labels: Object.keys(topicTotals).length ? Object.keys(topicTotals) : ['-'],
                     datasets: [{
-                        label: 'InversiÃ³n',
+                        label: 'Inversi??n',
                         data: Object.values(topicTotals).length ? Object.values(topicTotals) : [0],
                         backgroundColor: isDark ? 'rgba(0, 240, 255, 0.7)' : 'rgba(14, 165, 233, 0.8)',
                         borderRadius: 6
@@ -860,7 +860,7 @@
 
         function editEntry(id) { openModal(id); }
         function deleteEntry(id) {
-            if(confirm("Â¿Seguro que deseas eliminar este registro?")) {
+            if(confirm("??Seguro que deseas eliminar este registro?")) {
                 entries = entries.filter(e => String(e.id) !== String(id));
                 manualSaveData();
                 renderViews();
@@ -876,7 +876,7 @@
             if(!entry) return;
 
             document.getElementById('entry-file-parent-id').value = entryId;
-            document.getElementById('entry-files-title').textContent = `LicitaciÃ³n: ${entry.topic}`;
+            document.getElementById('entry-files-title').textContent = `Licitaci??n: ${entry.topic}`;
             document.getElementById('entry-file-form').reset();
             
             renderEntryFilesList(entryId);
@@ -951,7 +951,7 @@
         }
 
         function deleteEntryFile(id, entryId) {
-            if(confirm('Â¿Eliminar este documento?')) {
+            if(confirm('??Eliminar este documento?')) {
                 entryFiles = entryFiles.filter(f => f.id !== id);
                 saveEntryFiles();
                 renderEntryFilesList(entryId);
@@ -1007,3 +1007,4 @@ function escapeHtml(str) {
     </script>
 </body>
 </html>
+
