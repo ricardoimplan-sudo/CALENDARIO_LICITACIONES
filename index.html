@@ -522,7 +522,7 @@
             
             // Empaquetar los entryFiles dentro de cada entry para que Google Sheets los guarde en 1 sola hoja
             const uploadEntries = entries.map(e => {
-                const attached = entryFiles.filter(f => f.entryId === e.id);
+                const attached = entryFiles.filter(f => String(f.entryId) === String(e.id));
                 return { ...e, files_json: JSON.stringify(attached) };
             });
 
