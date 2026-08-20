@@ -390,6 +390,17 @@
         </div>
     </div>
 
+    <!-- Modal para Detalle de Licitación -->
+    <div id="detail-modal" class="fixed inset-0 bg-slate-900/40 dark:bg-slate-950/80 backdrop-blur-sm z-[300] hidden flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-cyan-500/40 shadow-2xl max-w-md w-full overflow-hidden p-6 relative">
+            <h3 class="font-bold text-slate-800 dark:text-slate-100 text-lg mb-3">Detalle de Licitación</h3>
+            <p id="detail-modal-text" class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6 font-mono whitespace-pre-wrap"></p>
+            <div class="flex justify-end">
+                <button onclick="closeDetailModal()" class="px-5 py-2.5 bg-cyan-500 hover:bg-cyan-600 text-white font-bold rounded-xl transition shadow-md">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Container -->
     <div id="toast-container" class="fixed bottom-5 right-5 z-[300] flex flex-col gap-2 pointer-events-none"></div>
 
@@ -720,7 +731,7 @@
                     datasets: [{
                         label: 'Inversión',
                         data: sortedData,
-                        backgroundColor: isDark ? 'rgba(0, 240, 255, 0.7)' : 'rgba(14, 165, 233, 0.8)',
+                        backgroundColor: sortedData.map((_, i) => i % 2 === 0 ? 'rgba(0, 255, 135, 0.85)' : 'rgba(255, 115, 0, 0.85)'),
                         borderRadius: 6
                     }]
                 },
@@ -728,6 +739,18 @@
                     indexAxis: 'y',
                     responsive: true, 
                     maintainAspectRatio: false, 
+                    onClick: (event, elements) => {
+                        if (elements.length > 0) {
+                            const index = elements[0].index;
+                            const fullLabel = sortedLabels[index];
+                            const value = sortedData[index];
+                            const formattedValue = new Intl.NumberFormat('es-MX', { style: 'currency', currency: 'MXN' }).format(value);
+                            openDetailModal(`${fullLabel}\n\nInversión: ${formattedValue}`);
+                        }
+                    },
+                    onHover: (event, chartElement) => {
+                        event.native.target.style.cursor = chartElement.length ? 'pointer' : 'default';
+                    },
                     plugins: { 
                         legend: { display: false },
                         tooltip: {
@@ -795,7 +818,7 @@
                     labels: statusLabels,
                     datasets: [{
                         data: [statusSums['Completado'], statusSums['En proceso'], statusSums['Pendiente'], statusSums['Cancelado']],
-                        backgroundColor: ['#00ff87', '#ffc400', '#00f0ff', '#ff007f'],
+                        backgroundColor: ['#00ff87', '#ff7300', '#ffea00', '#ff3c00'],
                         borderWidth: 0
                     }]
                 },
@@ -874,6 +897,15 @@
             inputElem.value = ''; // Reset input
         }        
 
+
+        function openDetailModal(text) {
+            document.getElementById('detail-modal-text').innerText = text;
+            const modal = document.getElementById('detail-modal');
+            modal.classList.remove('hidden');
+        }
+        function closeDetailModal() {
+            document.getElementById('detail-modal').classList.add('hidden');
+        }
 
         // Modal & CRUD
         function openModal(entryId = null, defaultDate = null) {
